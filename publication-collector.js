@@ -44,7 +44,7 @@ export class PublicationCollector extends EventEmitter {
       throw new Error(`PublicationCollector: Couldn't find publication "${name}"! Did you misspell it?`);
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
       const done = (...res) => {
         callback && callback(...res);
@@ -74,7 +74,7 @@ export class PublicationCollector extends EventEmitter {
         }
       });
 
-      const result = handler.call(this, ...args);
+      const result = await handler.call(this, ...args);
 
       this._publishHandlerResult(result);
     });
