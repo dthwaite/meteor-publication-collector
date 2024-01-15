@@ -32,6 +32,8 @@ export class PublicationCollector extends EventEmitter {
   }
 
   collect(name, ...args) {
+    this._name=name;
+    this._params=args;
     let callback;
     // extracts optional callback from latest argument
     if (_.isFunction(args[args.length - 1])) {
