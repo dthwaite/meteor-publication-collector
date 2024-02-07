@@ -33,7 +33,7 @@ meteor add johanbrook:publication-collector
 This package is server-only and can't be imported on the client.
 
 ```js
-// server/myPublication.test.js
+// server/myPublication.utilityMethods.test.js
 
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 
