@@ -78,7 +78,7 @@ export class PublicationCollector extends EventEmitter {
 
       const result = await handler.call(this, ...args);
 
-      this._publishHandlerResult(result);
+      await this._publishHandlerResult(result);
     });
   }
 
@@ -86,7 +86,7 @@ export class PublicationCollector extends EventEmitter {
    * Reproduces "_publishHandlerResult" processing
    * @see {@link https://github.com/meteor/meteor/blob/master/packages/ddp-server/livedata_server.js#L1045}
    */
-  _publishHandlerResult(res) {
+  async _publishHandlerResult(res) {
     const cursors = [];
 
     // publication handlers can return a collection cursor, an array of cursors or nothing.
@@ -123,10 +123,10 @@ export class PublicationCollector extends EventEmitter {
       try {
         // for each cursor we call _publishCursor method which starts observing the cursor and
         // publishes the results.
-        cursors.forEach((cur) => {
+        for (cur of cursors) {
           this._ensureCollectionInRes(cur._getCollectionName());
-          cur._publishCursor(this);
-        });
+          await cur._publishCursor(this);
+        }
       } catch (e) {
         this.error(e);
         return;
