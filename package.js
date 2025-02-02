@@ -5,8 +5,7 @@ Package.describe({
   version: '1.1.0',
   summary: 'Test a Meteor publication by collecting its output.',
   documentation: 'README.md',
-  git: 'https://github.com/johanbrook/meteor-publication-collector.git',
-  debugOnly: true
+  git: 'https://github.com/johanbrook/meteor-publication-collector.git'
 });
 
 Npm.depends({
